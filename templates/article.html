@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ article.title }} — Университетские новости</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="{{ url_for('index') }}" aria-label="На главную">
+                <span class="brand-mark">U</span>
+                <span>Университет<span class="brand-light"> / Новости</span></span>
+            </a>
+            <a class="header-back" href="{{ url_for('index') }}">← Все новости</a>
+        </div>
+    </header>
+
+    <main class="container article-container">
+        <a class="back-link" href="{{ url_for('index') }}">← Вернуться к списку новостей</a>
+        <article class="article-content">
+            <div class="card-topline">
+                <span class="category-tag">{{ article.category }}</span>
+                <time>{{ article.date }}</time>
+            </div>
+            <h1>{{ article.title }}</h1>
+            <p class="article-summary">{{ article.summary }}</p>
+            <div class="article-rule"></div>
+            <p class="article-body">{{ article.content }}</p>
+            <p class="article-author">Опубликовано: {{ article.author }}</p>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <span>© 2026 Университетские новости</span>
+            <span>Учебный проект по дисциплине DevOps</span>
+        </div>
+    </footer>
+</body>
+</html>

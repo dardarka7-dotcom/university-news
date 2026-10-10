@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Университетские новости</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="{{ url_for('index') }}" aria-label="На главную">
+                <span class="brand-mark">U</span>
+                <span>Университет<span class="brand-light"> / Новости</span></span>
+            </a>
+            <span class="header-note">Главное о жизни кампуса</span>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <p class="eyebrow">НОВОСТИ КАМПУСА</p>
+            <h1>Университетские<br><span>новости</span></h1>
+            <p class="hero-copy">События, достижения и объявления университетского сообщества — в одном месте.</p>
+        </section>
+
+        <section class="news-section" aria-labelledby="news-heading">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">БУДЬ В КУРСЕ</p>
+                    <h2 id="news-heading">Последние публикации</h2>
+                </div>
+                <span class="news-count">{{ news|length }} публикаций</span>
+            </div>
+
+            <nav class="filters" aria-label="Фильтр новостей">
+                {% for category in categories %}
+                    <a class="filter {% if category == selected_category %}active{% endif %}"
+                       href="{{ url_for('index', category=category) }}">{{ category }}</a>
+                {% endfor %}
+            </nav>
+
+            {% if news %}
+                <div class="news-grid">
+                    {% for item in news %}
+                        <article class="news-card">
+                            <div class="card-topline">
+                                <span class="category-tag">{{ item.category }}</span>
+                                <time>{{ item.date }}</time>
+                            </div>
+                            <h3><a href="{{ url_for('news_detail', news_id=item.id) }}">{{ item.title }}</a></h3>
+                            <p>{{ item.summary }}</p>
+                            <a class="read-more" href="{{ url_for('news_detail', news_id=item.id) }}">Читать новость <span aria-hidden="true">↗</span></a>
+                        </article>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">В этой категории пока нет новостей.</div>
+            {% endif %}
+        </section>
+
+        <section class="subscribe-note">
+            <div class="note-icon">i</div>
+            <div>
+                <h3>Оставайся на связи с университетом</h3>
+                <p>Проверяй раздел регулярно, чтобы не пропустить важные объявления и события.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <span>© 2026 Университетские новости</span>
+            <span>Учебный проект по дисциплине DevOps</span>
+        </div>
+    </footer>
+</body>
+</html>
