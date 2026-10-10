@@ -96,3 +96,5 @@ git push -u origin main
 - скриншот результата локального запуска `python -m pytest -v`;
 - скриншот GitHub Actions с успешными шагами Build и Test;
 - скриншот успешного commit/push или истории коммитов.
+
+Проверка автоматического запуска CI/CD после push.
